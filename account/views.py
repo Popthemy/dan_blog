@@ -36,7 +36,7 @@ class LoginView(GenericAPIView):
     '''Allows login with either email or password and return that user 
     access and refresh token
     '''
-
+    
     serializer_class = LoginSerializer
     permission_classes = [IsAnonymous]
 

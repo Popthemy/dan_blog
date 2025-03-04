@@ -4,4 +4,4 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-  pass
+  email = models.EmailField(unique=True)
