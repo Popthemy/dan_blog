@@ -96,12 +96,13 @@ Welcome to the **  Dan BlogStory Publishing Platform** 🎉 This is a simple pla
 
 | Method | Endpoint               | Description                          |
 |--------|------------------------|--------------------------------------|
-| POST   | `/api/register/`       | Register a new user                  |
-| POST   | `/api/login/`          | Log in and get JWT tokens            |
+| POST   | `/api/accounts/register/`       | Register a new user                  |
+| POST   | `/api/accounts/login/`          | Log in and get JWT tokens            |
 | GET    | `/api/stories/`        | Fetch all published stories          |
 | POST   | `/api/stories/`        | Create a new story                   |
 | PUT    | `/api/stories/{id}/`   | Edit a story (author only)           |
 | DELETE | `/api/stories/{id}/`   | Delete a story (author only)         |
+| GET | `/swagger/`   | Read documentation         |
 
 ### Example Requests
 
