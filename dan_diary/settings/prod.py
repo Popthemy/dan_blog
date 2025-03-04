@@ -12,7 +12,7 @@ from decouple import config
 
 DEBUG = config('debug',default=False, cast=bool)
 
-ALLOWED_HOSTS = ['dan-blog.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 DATABASES = {
