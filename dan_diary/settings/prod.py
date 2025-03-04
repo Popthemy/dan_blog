@@ -14,9 +14,6 @@ DEBUG = config('debug',default=False, cast=bool)
 
 ALLOWED_HOSTS = ['dan-blog.onrender.com']
 
-DJANGO_SETTINGS_MODULE = 'dan_diary.settings.prod'
-
-
 DATABASES = {
     'default': dj_database_url.parse(config('DB_URL'))
 }
