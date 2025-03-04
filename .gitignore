@@ -8,6 +8,8 @@ guidelines
 
 # environment variables
 .env
+Pipfile
+Pipfile.lock
 
 # Bytecode files
 *.pyc

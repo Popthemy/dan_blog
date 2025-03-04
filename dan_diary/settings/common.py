@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # third party apps
     'debug_toolbar',
     'rest_framework',
-    'drf_yasg'
+    'drf_yasg',
     'rest_framework_simplejwt',
 
     # local apps
