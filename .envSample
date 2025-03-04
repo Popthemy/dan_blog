@@ -1,0 +1,9 @@
+<!-- Contain sample of variable in our .env file -->
+secret_key = your_secret_key
+
+
+debug = False
+
+DJANGO_SETTINGS_MODULE = dan_diary.settings.prod for production or remove it to use dan_diary.settings.dev by default
+
+DB_URL = your_db_link
