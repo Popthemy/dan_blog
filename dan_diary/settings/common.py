@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -37,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third party apps
+    'debug_toolbar',
     'rest_framework',
-    'drf_spectacular',
+    'drf_yasg'
     'rest_framework_simplejwt',
 
     # local apps
@@ -57,6 +59,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'dan_diary.urls'
+
+INTERNAL_IPS = [
+    "127.0.0.1"
+]
 
 TEMPLATES = [
     {
@@ -124,3 +130,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.CustomUser'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    )
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}
