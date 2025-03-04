@@ -22,11 +22,12 @@ class UserRegisterView(GenericAPIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        token = get_jwt_tokens(user= serializer.save())
 
         data = {
             'status': 'Success',
             'message': 'Registration Successful',
+            'token': token,
             'data': serializer.data
         }
         return Response(data=data, status=status.HTTP_201_CREATED)
@@ -36,7 +37,7 @@ class LoginView(GenericAPIView):
     '''Allows login with either email or password and return that user 
     access and refresh token
     '''
-    
+
     serializer_class = LoginSerializer
     permission_classes = [IsAnonymous]
 
@@ -45,34 +46,22 @@ class LoginView(GenericAPIView):
             data=request.data, context={'request': request})
 
         if serializer.is_valid():
-            user = self.login_user(serializer.validated_data)
+            user = serializer.validated_data
 
-            if user is not None:
-                serializer = UserSerializer(user)
-                token = get_jwt_tokens(user=user)
+            serializer = UserSerializer(user)
+            token = get_jwt_tokens(user=user)
 
-                data = {
-                    'status': 'Success',
-                    'message': 'Welcome back👋',
-                    'token':token,
-                    'data': serializer.data
-                }
-                return Response(data=data, status=status.HTTP_200_OK)
+            data = {
+                'status': 'Success',
+                'message': 'Welcome back👋',
+                'token':token,
+                'data': serializer.data
+            }
+            return Response(data=data, status=status.HTTP_200_OK)
 
         return Response(data={
             'status': 'Error',
             'message': 'Login Unsuccessful',
             'data': serializer.errors},
-            status=status.HTTP_401_UNAUTHORIZED)
+            status=status.HTTP_400_BAD_REQUEST)
 
-    def login_user(self, validated_data):
-        '''Allows login with either email or password and return that user access and refresh token'''
-
-        email = validated_data.get('email')
-        username = validated_data.get('username')
-        password = validated_data.get('password')
-
-        user = authenticate(
-            request=self.request, username=username,email=email, password=password)
-
-        return user

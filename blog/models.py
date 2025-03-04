@@ -26,4 +26,4 @@ class Story(models.Model):
 
     def get_absolute_url(self):
         '''get the url to the story detail'''
-        return reverse("story_detail", kwargs={"pk": self.pk})
+        return reverse("story-detail", kwargs={"pk": self.pk})
